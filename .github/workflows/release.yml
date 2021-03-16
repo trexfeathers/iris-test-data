@@ -21,8 +21,6 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - run: git config user.name "GitHub Actions"
-      - run: git config user.email "actions@users.noreply.github.com"
       
       - name: Calculate next version
         run: |
@@ -33,7 +31,7 @@ jobs:
       - name: Cut release
         uses: elgohr/Github-Release-Action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.test_token }}
         with:
           release: env.THIS_VERSION
           args: "My release message"
