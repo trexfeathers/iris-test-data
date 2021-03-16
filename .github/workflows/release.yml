@@ -1,0 +1,35 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the action will run. 
+on:
+  push:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      
+      - name: Calculate next version
+        run: |
+          export CURRENT_VERSION=$(cat version.txt)
+          export THIS_VERSION=$(echo $CURRENT_VERSION | awk -F. -v OFS=. '{$NF++;print}')
+          echo "THIS_VERSION=$THIS_VERSION" >> $GITHUB_ENV
+      
+      - name: Cut release
+        uses: elgohr/Github-Release-Action@v3.1
+        with:
+          release: env.THIS_VERSION
+      
+      - name: Store next version
+        run: echo ${{ env.THIS_VERSION }} > version.txt
