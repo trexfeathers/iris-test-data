@@ -33,7 +33,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         with:
-          release: env.THIS_VERSION
+          args: env.THIS_VERSION
       
       - name: Store next version
         run: echo ${{ env.THIS_VERSION }} > version.txt
