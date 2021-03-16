@@ -32,6 +32,8 @@ jobs:
       
       - name: Cut release
         uses: elgohr/Github-Release-Action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         with:
           release: env.THIS_VERSION
           args: "My release message"
