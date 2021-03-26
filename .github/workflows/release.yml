@@ -39,8 +39,8 @@ jobs:
           git push          
       
       - name: Cut release
-        uses: elgohr/Github-Release-Action@master
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ env.THIS_VERSION }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          args: v${{ env.THIS_VERSION }} v${{ env.THIS_VERSION }}
