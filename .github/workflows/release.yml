@@ -1,4 +1,4 @@
-# Creates a new bugfix release whenever a push is made to master.
+# Creates a new bugfix release whenever a push is made to master .
 
 name: release
 
